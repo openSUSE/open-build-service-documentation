@@ -56,45 +56,44 @@ https://www.suse.com/communities/blog/suse-studio-integration/
   <sect2 xml:id="sec.obsbg.concept.pkgspec">
    <title>Build Recipe</title>
    <para>
-    To create a package in &obsa;, you need a <firstterm>build recipe</firstterm>
-    which contains the following information:
+    To create a package in &obsa;, you need to provide the following
+    information:
    </para>
    <itemizedlist>
     <listitem>
      <formalpara>
       <title>Metadata</title>
-      <para>The package name and the description are mandatory. Other data
-       such as the version, the license, the upstream URL
-       is optional.</para>
+      <para>This is the package name, its description, possibly
+      license information...</para>
      </formalpara>
     </listitem>
     <listitem>
      <formalpara>
-      <title>Requirements</title>
+      <title>Information on how to build</title>
       <para>
-       Packages depend on other packages to function properly.
-       There are two types of requirements:
-       <emphasis>build requirements</emphasis> and
-       <emphasis>installation requirements</emphasis>.
+        You need to indicate how to produce the files that will be
+        part of the package: where to get the sources, and which
+        command(s) to run, e.g. <command>make</command>.
+      </para>
+      <para>
+        The build commands generally requires that some other packages
+        are installed beforehand; for example, to build a C++ program,
+        you need a C++ compiler.  You need to indicate this list of
+        packages: the <emphasis>build requirements</emphasis>.
       </para>
      </formalpara>
-     <para>
-      Build requirements are dependencies which are needed during the
-      build process in &obsa;. For example, a C++ program needs
-      a C++ compiler.
-     </para>
-     <para>
-      Installation requirements are dependencies which are needed when installing
-      the final package.
-     </para>
     </listitem>
     <listitem>
      <formalpara>
-      <title>A Package List</title>
+      <title>Information on package contents and install/remove directives</title>
       <para>
-       To successfully install and remove a package and all its contents,
-       the package manager needs to know which files and directories belong to
-       which package.
+        You need to list the files and directories to include into the
+        package.
+      </para>
+      <para>
+        The installed package may require other packages to function
+        properly.  They are called the <emphasis>installation
+        requirements</emphasis>.
       </para>
      </formalpara>
     </listitem>
@@ -103,7 +102,8 @@ https://www.suse.com/communities/blog/suse-studio-integration/
     For RPM-based operating systems such as &opensuse;, &sle;, or &rhel;, all
     the information above is included
     in a file with the file extension <filename
-     class="extension">.spec</filename>.
+     class="extension">.spec</filename>.  For deb-based systems such as Debian, it is
+    organized in several files under a <filename>debian/</filename> directory.
    </para>
   </sect2>
   <sect2 xml:id="sec.obsbg.buildhost">
